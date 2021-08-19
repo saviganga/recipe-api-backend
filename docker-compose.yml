@@ -1,0 +1,23 @@
+version: "3"
+
+# define the services that make up the application
+services: 
+
+  # name of the service 
+  app:
+
+    # where to build the service image from
+    build: 
+      context: .
+    
+    # expose ports
+    ports: 
+      - "7000:8000"
+
+    # add volumes (gets realtime updates in our local machine to docker environment)
+    volumes: 
+      - ./recipeapp:/recipeapp
+
+    # command to run application in docker container
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"

@@ -5,3 +5,10 @@ def add(x, y):
     """
 
     return x + y
+
+def subtract(x, y):
+    """
+    returns the difference between two numbers
+    """
+
+    return x - y

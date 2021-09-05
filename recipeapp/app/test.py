@@ -1,7 +1,7 @@
 # import django test case
 from django.test import TestCase
 
-from app.calc import add
+from app.calc import add, subtract
 
 class CalcTest(TestCase):
 
@@ -10,3 +10,9 @@ class CalcTest(TestCase):
         Test for addition
         """
         self.assertEqual(add(10,189), 199)
+
+    def test_subtract_function(self):
+        """
+        Test for subtraction
+        """
+        self.assertEqual(subtract(100, 50), 50)

@@ -1,0 +1,16 @@
+language: python
+
+# the version of python to be used
+python:
+  - "3.6"
+
+# services to be used in the travis build
+services:
+  - docker
+
+# script to run before automation tasks
+before_script: pip install docker-compose
+
+# automation task
+script:
+  - docker-compose run app sh -c "python manage.py test && flake8"

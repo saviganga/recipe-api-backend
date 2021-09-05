@@ -12,7 +12,7 @@ services:
     
     # expose ports
     ports: 
-      - "7000:8000"
+      - "8000:8000"
 
     # add volumes (gets realtime updates in our local machine to docker environment)
     volumes: 

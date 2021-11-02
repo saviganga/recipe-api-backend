@@ -80,43 +80,50 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-# if os.getenv('GAE_APPLICATION', None):
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'HOST': '/cloudsql/recipe-api-backend:us-central1:recipe-db',
-#             'USER': 'recipe-db',
-#             'PASSWORD': 'casa1234',
-#             'NAME': 'recipeDB'
-#         }
-#     }
+if os.getenv('GAE_APPLICATION', None):
+    DATABASES = {
+        'gcloud': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': '/cloudsql/recipe-api-backend:us-central1:recipe-db',
+            'USER': 'recipe-db',
+            'PASSWORD': 'casa1234',
+            'NAME': 'recipeDB'
+        },
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': 'recipe-db.ckbk3ei7panj.us-east-1.rds.amazonaws.com',
+            'NAME': 'recipeDB',
+            'USER': 'recipe_db_user',
+            'PASSWORD': 'casa1234',
+        }
+    }
 
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'HOST': '127.0.0.1',
-#             'NAME': 'recipeDB-test',
-#             'USER': 'recipe-db',
-#             'PASSWORD': 'casa1234'
-#         }, 
-#         'aws': {
-#                     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#                     'HOST': 'recipe-api-db.ckbk3ei7panj.us-east-1.rds.amazonaws.com',
-#                     'NAME': 'recipe-api-db',
-#                     'USER': 'recipe_db',
-#                     'PASSWORD': 'casa1234',
-#                 },
-#         'staging': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'HOST': '127.0.0.1',
-#             'NAME': 'recipeDB-dev',
-#             'USER': 'recipe-db',
-#             'PASSWORD': 'casa1234',
-#         }
+else:
+    DATABASES = {
+        'gcloud': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': '127.0.0.1',
+            'NAME': 'recipeDB-test',
+            'USER': 'recipe-db',
+            'PASSWORD': 'casa1234'
+        }, 
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': 'recipe-db.ckbk3ei7panj.us-east-1.rds.amazonaws.com',
+            'NAME': 'recipeDB',
+            'USER': 'recipe_db_user',
+            'PASSWORD': 'casa1234',
+        },
+        'staging': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': '127.0.0.1',
+            'NAME': 'recipeDB-dev',
+            'USER': 'recipe-db',
+            'PASSWORD': 'casa1234',
+        }
 
 
-#     }
+    }
 
 
 # DATABASES = {
@@ -127,15 +134,15 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # }
 
 
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'HOST': 'recipe-api-db.ckbk3ei7panj.us-east-1.rds.amazonaws.com',
-            'NAME': 'recipe-api-db',
-            'USER': 'recipe_db',
-            'PASSWORD': 'casa1234',
-        }
-    }
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'HOST': 'recipe-db.ckbk3ei7panj.us-east-1.rds.amazonaws.com',
+#             'NAME': 'recipeDB',
+#             'USER': 'recipe_db_user',
+#             'PASSWORD': 'casa1234',
+#         }
+#     }
 
 
 

@@ -191,4 +191,7 @@ STATIC_ROOT = 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = "saviganga"
+# EMAIL_BACKEND = "saviganga"
+EMAIL_BACKEND = "saviour"
+
+

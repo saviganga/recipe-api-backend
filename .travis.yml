@@ -8,6 +8,10 @@ python:
 services:
   - docker
 
+# add dockerhub login credentials from environment variables
+before_install:
+  - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+
 # script to run before automation tasks
 before_script: pip install docker-compose
 

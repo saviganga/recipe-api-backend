@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i_%73m_kj90*^bm4x(2e@67j&99ta=+rdzemu*d-#xbj@31z)!'
+# SECRET_KEY = 'django-insecure-i_%73m_kj90*^bm4x(2e@67j&99ta=+rdzemu*d-#xbj@31z)!'
+SECRET_KEY = 'deGanGa'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'rest_framework',
+    'recipes'
 ]
 
 MIDDLEWARE = [
@@ -73,12 +79,72 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+if os.getenv('GAE_APPLICATION', None):
+    DATABASES = {
+        'gcloud': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': '/cloudsql/recipe-api-backend:us-central1:recipe-db',
+            'USER': 'recipe-db',
+            'PASSWORD': 'casa1234',
+            'NAME': 'recipeDB'
+        },
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': 'recipe-db.ckbk3ei7panj.us-east-1.rds.amazonaws.com',
+            'NAME': 'recipeDB',
+            'USER': 'recipe_db_user',
+            'PASSWORD': 'casa1234',
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'gcloud': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': '127.0.0.1',
+            'NAME': 'recipeDB-test',
+            'USER': 'recipe-db',
+            'PASSWORD': 'casa1234'
+        }, 
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': 'recipe-db.ckbk3ei7panj.us-east-1.rds.amazonaws.com',
+            'NAME': 'recipeDB',
+            'USER': 'recipe_db_user',
+            'PASSWORD': 'casa1234',
+        },
+        'staging': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': '127.0.0.1',
+            'NAME': 'recipeDB-dev',
+            'USER': 'recipe-db',
+            'PASSWORD': 'casa1234',
+        }
+
+
+    }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'HOST': 'recipe-db.ckbk3ei7panj.us-east-1.rds.amazonaws.com',
+#             'NAME': 'recipeDB',
+#             'USER': 'recipe_db_user',
+#             'PASSWORD': 'casa1234',
+#         }
+#     }
+
+
 
 
 # Password validation
@@ -118,10 +184,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = "saviganga"
+# EMAIL_BACKEND = "saviganga"
+EMAIL_BACKEND = "saviour"
+
+
